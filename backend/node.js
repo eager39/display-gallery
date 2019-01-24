@@ -67,7 +67,7 @@ app.get('/data', function(req, res) {
   
    fs.readFile('upload/test.mp4', 'base64', function(err, data) {
    
-   console.log(data)
+   
     res.json({"name":"asd","slika":data});
     
   });
