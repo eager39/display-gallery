@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ConsoleReporter } from 'jasmine';
 
 
 
@@ -20,7 +21,12 @@ export class AuthService {
        
       }
   public get currentUserValue() {
-    this.currentUserSubject =JSON.parse(localStorage.getItem('currentUser'));
+      try{
+           this.currentUserSubject =JSON.parse(localStorage.getItem('currentUser'));
+      }catch(err){
+          
+      }
+   
       return this.currentUserSubject;
   }
 

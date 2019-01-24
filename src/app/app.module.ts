@@ -12,13 +12,11 @@ import { LoginComponent } from './login/login.component'
 import { AuthService } from './auth.service'
 import { ApiDataService } from './api-data.service'
 import { AuthGuard } from './auth.guard'
-import {JwtInterceptor} from './jwt'
+
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { GalleryModule } from  '@ngx-gallery/core';
-
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,12 +35,11 @@ import { GalleryModule } from  '@ngx-gallery/core';
     MatInputModule,
     MatFormFieldModule,
     NgbModule,
-    PdfViewerModule,
-    GalleryModule.withConfig({ })
+    MDBBootstrapModule.forRoot()
 
 
   ],
-  providers: [AuthService,ApiDataService,AuthGuard,     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },],
+  providers: [AuthService,ApiDataService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

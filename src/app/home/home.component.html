@@ -1,25 +1,24 @@
-          
-<gallery id="mixedExample" [thumbTemplate]="thumbTemplate" [itemTemplate]="itemTemplate"></gallery>
 
-<!-- Add custom template to thumbnails -->
-<ng-template #thumbTemplate let-type="type">
-  <span *ngIf="type === 'youtube'" class="item-type">
-    <fa-icon [icon]="youtubeIcon" size="lg"></fa-icon>
-  </span>
-  <span *ngIf="type === 'video'" class="item-type">
-    <fa-icon [icon]="videoIcon" size="lg"></fa-icon>
-  </span>
-</ng-template>
+<div class="container">
+ 
+  
+    <video class="video-fluid" autoplay loop muted>
+      <source src="http://localhost:3000/video" type="video/mp4" />
+    </video>
+  
 
-<!-- Add custom template to image items -->
-<ng-template #itemTemplate
-             let-index="index"
-             let-type="type"
-             let-data="data"
-             let-currIndex="currIndex">
-  <span *ngIf="type === 'image' && index === currIndex" [@slideAnimation] class="item-text">
-    {{data?.title}}
-  </span>
-</ng-template>
 
-        
+    <mdb-carousel [isControls]="false" [animation]="'slide'">
+        <mdb-carousel-item>
+          <img class="d-block w-100"  alt="First slide">
+        </mdb-carousel-item>
+        <mdb-carousel-item>
+          <img class="d-block w-100" src="assets/slika.jpg" alt="Second slide">
+        </mdb-carousel-item>
+        <mdb-carousel-item>
+          <img class="d-block w-100" src="assets/slika.jpg" alt="Third slide">
+        </mdb-carousel-item>
+      </mdb-carousel>
+
+
+</div>
