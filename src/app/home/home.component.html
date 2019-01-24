@@ -1,25 +1,25 @@
-<div class="container">
-<ngb-carousel  [showNavigationArrows]="showNavigationArrows" 
-[showNavigationIndicators]="showNavigationIndicators">
-
-
-
-        <ng-template ngbSlide width="100%" height="100%" >
-          <img [src]="'assets/slika.jpg'" alt="Random slide">
           
-        </ng-template>
-        <ng-template ngbSlide  >
-                <video width="900"  height="900" autoplay loop muted>
-                        <source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
-                      </video>
-                      
-                
-              </ng-template>
-            
+<gallery id="mixedExample" [thumbTemplate]="thumbTemplate" [itemTemplate]="itemTemplate"></gallery>
 
+<!-- Add custom template to thumbnails -->
+<ng-template #thumbTemplate let-type="type">
+  <span *ngIf="type === 'youtube'" class="item-type">
+    <fa-icon [icon]="youtubeIcon" size="lg"></fa-icon>
+  </span>
+  <span *ngIf="type === 'video'" class="item-type">
+    <fa-icon [icon]="videoIcon" size="lg"></fa-icon>
+  </span>
+</ng-template>
 
+<!-- Add custom template to image items -->
+<ng-template #itemTemplate
+             let-index="index"
+             let-type="type"
+             let-data="data"
+             let-currIndex="currIndex">
+  <span *ngIf="type === 'image' && index === currIndex" [@slideAnimation] class="item-text">
+    {{data?.title}}
+  </span>
+</ng-template>
 
-         
-      </ngb-carousel>
-</div>
-      
+        

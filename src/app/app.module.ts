@@ -17,6 +17,7 @@ import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { GalleryModule } from  '@ngx-gallery/core';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     MatInputModule,
     MatFormFieldModule,
     NgbModule,
-    PdfViewerModule
+    PdfViewerModule,
+    GalleryModule.withConfig({ })
 
 
   ],
