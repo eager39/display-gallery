@@ -113,7 +113,7 @@ app.get('/data', function(req, res) {
       for(var i=0;i<imageArray.length;i++){
          slike.push({"slika":imageArray[i].toString("base64")})
       }
-      console.log(slike)
+    
      res.send(slike)
     }, function(err) {
        // an error occurred
@@ -215,6 +215,60 @@ app.get("/uredi",function(request,response){
   connection.query(sql, function(err, results) {
   console.log(results)
   response.json(results)
+  })
+
+
+
+})
+app.post("/deleteImg",function(request,response){
+ 
+  var id=request.body.id
+  var sql="DELETE FROM image WHERE id=?"
+  connection.query(sql,[id], function(err, results) {
+ if(!err){
+  response.json(true);
+ }
+  })
+
+
+
+})
+app.post("/showhideImg",function(request,response){
+ 
+  var id=request.body.id
+  var active=request.body.active
+  var sql="UPDATE image set active=? WHERE id=?"
+  connection.query(sql,[active,id], function(err, results) {
+ if(!err){
+  response.json(true);
+ }
+  })
+
+
+
+})
+app.post("/showhideVid",function(request,response){
+ 
+  var id=request.body.id
+  var active=request.body.active
+  var sql="UPDATE video set active=? WHERE id=?"
+  connection.query(sql,[active,id], function(err, results) {
+ if(!err){
+  response.json(true);
+ }
+  })
+
+
+
+})
+app.post("/deleteVid",function(request,response){
+ 
+  var id=request.body.id
+  var sql="DELETE FROM video WHERE id=?"
+  connection.query(sql,[id], function(err, results) {
+ if(!err){
+  response.json(true);
+ }
   })
 
 

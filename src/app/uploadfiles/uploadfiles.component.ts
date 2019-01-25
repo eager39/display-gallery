@@ -12,6 +12,8 @@ export class UploadfilesComponent implements OnInit {
   loading: boolean = false;
   uspeh;
   napaka=false;
+  images;
+  videos;
   @ViewChild('fileInput') fileInput: ElementRef;
   constructor(private fb: FormBuilder,  private _dataService: ApiDataService,) {
     this.createForm();
@@ -28,6 +30,8 @@ export class UploadfilesComponent implements OnInit {
     this._dataService.get("uredi").subscribe(
       data => {
         console.log(data);
+        this.images=data[0];
+        this.videos=data[1];
       }
     )
   }
@@ -36,6 +40,88 @@ export class UploadfilesComponent implements OnInit {
 
   ngOnInit() {
     this.allImageVideo()
+  }
+  deleteImg(id){
+    
+    this._dataService.add({"id":id},"deleteImg").subscribe(
+        (val) => {
+        
+          
+            console.log("POST call successful value returned in body", 
+                        val);
+                         this.allImageVideo()
+        },
+        response => {
+          console.log("POST call in error", response);
+        },
+        () => {
+            console.log("The POST observable is now completed.");
+        
+        });
+  
+
+  }
+  deleteVid(id){
+    this._dataService.add({"id":id},"deleteVid").subscribe(
+        (val) => {
+         this.allImageVideo();
+          
+            console.log("POST call successful value returned in body", 
+                        val);
+        },
+        response => {
+          console.log("POST call in error", response);
+        },
+        () => {
+            console.log("The POST observable is now completed.");
+        
+        });
+  
+
+  }
+  showhideImg(image){
+    if(image.active==0){
+      image.active=1;
+     }else{
+       image.active=0;
+     }
+     this._dataService.add({"id":image.id,"active":image.active},"showhideImg").subscribe(
+      (val) => {
+       this.allImageVideo();
+        
+          console.log("POST call successful value returned in body", 
+                      val);
+      },
+      response => {
+        console.log("POST call in error", response);
+      },
+      () => {
+          console.log("The POST observable is now completed.");
+      
+      });
+
+  }
+  showhideVid(video){
+    if(video.active==0){
+      video.active=1;
+     }else{
+       video.active=0;
+     }
+     this._dataService.add({"id":video.id,"active":video.active},"showhideImg").subscribe(
+      (val) => {
+       this.allImageVideo();
+        
+          console.log("POST call successful value returned in body", 
+                      val);
+      },
+      response => {
+        console.log("POST call in error", response);
+      },
+      () => {
+          console.log("The POST observable is now completed.");
+      
+      });
+
   }
   
   onFileChange(event) {
@@ -62,6 +148,7 @@ export class UploadfilesComponent implements OnInit {
           if(data){
             this.uspeh=true
             this.napaka=false
+            this.allImageVideo();
           }else{
             this.napaka=true
           }
