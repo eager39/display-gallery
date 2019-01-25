@@ -13,7 +13,8 @@ var connection = mysql.createConnection({
   host: 'localhost',
   user: conf.DBuser, 
   password: conf.DBpass, 
-  database: 'video_image'
+  database: 'video_image',
+  multipleStatements: true
 })
 
 
@@ -131,6 +132,10 @@ app.get('/data', function(req, res) {
 });
 
 app.post("/image",function(request,response){
+  if(!request.body.avatar){
+   response.json(false)
+   return false;
+  }
 var filename=request.body.avatar.filename;
 var image=request.body.avatar.value;
 var filetype=request.body.avatar.filetype;
@@ -204,6 +209,17 @@ app.post('/auth', function(request, response) {
   
  
 });
+app.get("/uredi",function(request,response){
+
+  var sql="SELECT id,name,active FROM image;SELECT * FROM video"
+  connection.query(sql, function(err, results) {
+  console.log(results)
+  response.json(results)
+  })
+
+
+
+})
 
 
 

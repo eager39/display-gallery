@@ -5,7 +5,21 @@
       <input type="file" id="avatar" accept="video/*,image/*" (change)="onFileChange($event)" #fileInput>
       <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">Pobrisi datoteko</button>
     </div>
-    <button type="submit" [disabled]="form.invalid || loading" class="btn btn-success">Pošlji <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+    <button type="submit" [disabled]="form.invalid || loading" class="btn btn-success">Naloži <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
     <ng-container *ngIf="uspeh">Uspešno naloženo</ng-container>
-    <ng-container *ngIf="!uspeh && form.dirty">Napaka </ng-container>
+    <ng-container *ngIf="napaka">Napaka </ng-container>
   </form>
+
+
+
+
+  <ul>
+    <li *ngFor="let image of images">
+     Ime: {{image.name}} ,aktivno: {{image.active}}
+    </li>
+
+  </ul>
+  <ul>
+
+
+    </ul>
