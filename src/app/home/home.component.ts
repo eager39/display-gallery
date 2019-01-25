@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
 
   async userData() {
     this.data =await this._dataService.get("data").toPromise()
-    console.log(this.data.slika)
+    console.log(this.data)
   }
  
   logout(){

@@ -1,0 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  
+    <div class="form-group">
+      <label for="avatar">Slika / video</label>
+      <input type="file" id="avatar" accept="video/*,image/*" (change)="onFileChange($event)" #fileInput>
+      <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">Pobrisi datoteko</button>
+    </div>
+    <button type="submit" [disabled]="form.invalid || loading" class="btn btn-success">Pošlji <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+    <ng-container *ngIf="uspeh">Uspešno naloženo</ng-container>
+    <ng-container *ngIf="!uspeh && form.dirty">Napaka </ng-container>
+  </form>

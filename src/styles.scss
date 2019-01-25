@@ -10,10 +10,21 @@ body,html{
     align-items: center;
     justify-content: center;
     width: 100%;
+    
 }
 
 @media (min-width: 1200px){
     .container {
         max-width: 100%;
     }
+    }
+    mdb-carousel-item{
+        width: 40%;
+    }
+    .left{
+        max-width: 800px;
+        margin-right: 50px;
+    }
+    .right{
+        max-width: 800px;
     }

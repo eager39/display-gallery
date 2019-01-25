@@ -1,22 +1,21 @@
 
 <div class="container">
  
-  
-    <video class="video-fluid" autoplay loop muted >
+  <div class="left"><video class="video-fluid" muted autoplay loop muted >
       <source src="http://localhost:3000/video" type="video/mp4" />
-    </video>
+    </video></div>
+    
   
 
-
-    <mdb-carousel [isControls]="false" [animation]="'slide'">
+<div class="right">
+         <mdb-carousel [isControls]="false" >
        
-        <mdb-carousel-item>
-          <img class="d-block w-100" src="assets/slika.jpg" alt="Second slide">
-        </mdb-carousel-item>
-        <mdb-carousel-item>
-          <img class="d-block w-100" src="assets/slika.jpg" alt="Third slide">
-        </mdb-carousel-item>
-      </mdb-carousel>
+                        <mdb-carousel-item *ngFor="let slika of data">
+                                        <img class="d-block w-100" [src]="'data:image/jpg;base64,'+slika.slika" alt="Second slide">
+                                      </mdb-carousel-item>
+        
+      </mdb-carousel></div>
+   
 
 
 </div>
