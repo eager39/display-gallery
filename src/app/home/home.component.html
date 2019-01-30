@@ -1,7 +1,7 @@
 
 <div class="container">
  
-  <div class="left"><video class="video-fluid"  autoplay loop muted >
+  <div class="left"><video class="video-fluid"  onloadedmetadata="this.muted=true" autoplay loop >
       <source [src]="apiurl+'video'" type="video/mp4" />
     </video></div>
     

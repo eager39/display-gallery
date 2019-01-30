@@ -91,8 +91,12 @@ app.get('/data',cors(), function(req, res) {
 
 
       function getImage(image) {
-         var imgPath = __dirname+"/upload/" + image;
-         return fs1.readFile(imgPath);
+        return new Promise((resolve, reject) => { 
+          var imgPath = __dirname+"/upload/" + image;
+          fs.readFile(imgPath, (err, buffer) => {
+              if (err) reject(err); else resolve(buffer);
+          });
+      });
       }
 
       function getAllImages() {
