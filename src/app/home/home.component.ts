@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiDataService } from '../api-data.service';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../auth.service'
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -12,18 +13,19 @@ export class HomeComponent implements OnInit {
   constructor(
     private _dataService: ApiDataService,
     private auth:AuthService,
+   
 
    
     ) {
      
      }
-     
+      private actionUrl: string=environment.baseUrl
     
   data;
   user;
-
+     apiurl;
   ngOnInit() {
-   
+   this.apiurl=this.actionUrl
   this.userData()  
  
  //this.user=this.auth.currentUserValue;

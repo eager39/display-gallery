@@ -107,7 +107,7 @@ export class UploadfilesComponent implements OnInit {
      }else{
        video.active=0;
      }
-     this._dataService.add({"id":video.id,"active":video.active},"showhideImg").subscribe(
+     this._dataService.add({"id":video.id,"active":video.active},"showhideVid").subscribe(
       (val) => {
        this.allImageVideo();
         

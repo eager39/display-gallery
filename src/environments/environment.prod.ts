@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: "///prikazovalnik.academia.upam.si:3001/"
+  baseUrl: "http://prikazovalnik.academia.upam.si:3001/"
 };

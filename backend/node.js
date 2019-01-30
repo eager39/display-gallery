@@ -35,12 +35,12 @@ app.use(bodyParser.json({
 }));
 
 
-app.get('/video', function(req, res) {
+app.get('/video',cors(), function(req, res) {
    var sql = 'SELECT id,name,active FROM video WHERE active=1 LIMIT 1 ';
    connection.query(sql, function(err, results) {
       if (err) throw err
       if (results.length > 0) {
-         const path = 'upload/' + results[0].name;
+         const path = __dirname+'/upload/' + results[0].name;
          const stat = fs.statSync(path)
          const fileSize = stat.size
          const range = req.headers.range
@@ -75,7 +75,7 @@ app.get('/video', function(req, res) {
    });
 });
 
-app.get('/data', function(req, res) {
+app.get('/data',cors(), function(req, res) {
 
    let arr = [];
    const fs1 = require('fs').promises;
@@ -91,7 +91,7 @@ app.get('/data', function(req, res) {
 
 
       function getImage(image) {
-         var imgPath = "upload/" + image;
+         var imgPath = __dirname+"/upload/" + image;
          return fs1.readFile(imgPath);
       }
 
@@ -121,8 +121,7 @@ app.get('/data', function(req, res) {
 
 
    });
-}, err => {
-   console.log("Error " + err);
+
 
 });
 
@@ -136,7 +135,7 @@ app.post("/image", function(request, response) {
    var filetype = request.body.avatar.filetype;
    if (filetype.includes("video")) {
       try {
-         fs.writeFile("upload/" + filename, image, "base64", function(err) {
+         fs.writeFile(__dirname+"/upload/" + filename, image, "base64", function(err) {
             if (err) {
                return console.log(err);
             }
@@ -152,7 +151,7 @@ app.post("/image", function(request, response) {
       }
    } else if (filetype.includes("image")) {
       try {
-         fs.writeFile("upload/" + filename, image, "base64", function(err) {
+         fs.writeFile(__dirname+"/upload/" + filename, image, "base64", function(err) {
             if (err) {
                return console.log(err);
             }

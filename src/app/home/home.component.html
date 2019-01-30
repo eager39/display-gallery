@@ -1,14 +1,14 @@
 
 <div class="container">
  
-  <div class="left"><video class="video-fluid" muted autoplay loop muted >
-      <source src="http://localhost:3000/video" type="video/mp4" />
+  <div class="left"><video class="video-fluid"  autoplay loop muted >
+      <source [src]="apiurl+'video'" type="video/mp4" />
     </video></div>
     
   
 
 <div class="right">
-         <mdb-carousel [isControls]="false" >
+         <mdb-carousel [isControls]="false" [interval]="5000" [noPause]="1" >
        
                         <mdb-carousel-item *ngFor="let slika of data">
                                         <img class="d-block w-100" [src]="'data:image/jpg;base64,'+slika.slika" alt="Second slide">
