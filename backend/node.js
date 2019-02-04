@@ -35,9 +35,13 @@ app.use(bodyParser.json({
 }));
 
 
-app.get('/video',cors(), function(req, res) {
-   var sql = 'SELECT id,name,active FROM video WHERE active=1 LIMIT 1 ';
-   connection.query(sql, function(err, results) {
+app.get('/video/:id',cors(), function(req, res) {
+   var sql = "SELECT id,name,active FROM video WHERE name=? ";
+   try{
+
+   
+   connection.query(sql,[req.params.id], function(err, results) {
+      
       if (err) throw err
       if (results.length > 0) {
          const path = __dirname+'/upload/' + results[0].name;
@@ -73,6 +77,9 @@ app.get('/video',cors(), function(req, res) {
          }
       }
    });
+}catch(error){
+   console.log(error);
+}
 });
 
 app.get('/data',cors(), function(req, res) {
@@ -84,15 +91,17 @@ app.get('/data',cors(), function(req, res) {
 
    var slike = [];
    var data;
-   var sql = 'SELECT id,name,active FROM image WHERE active=1 ';
+   var sql = 'SELECT id,name,active,type FROM image WHERE active=1;SELECT * FROM video where active=1';
    connection.query(sql, function(err, results) {
       if (err) throw err
-      data = results;
-
+      data = results[0];
+      videos=results[1];
+    
 
       function getImage(image) {
+         
         return new Promise((resolve, reject) => { 
-          var imgPath = __dirname+"/upload/" + image;
+          var imgPath = __dirname+"/upload/" + image.name;
           fs.readFile(imgPath, (err, buffer) => {
               if (err) reject(err); else resolve(buffer);
           });
@@ -103,7 +112,7 @@ app.get('/data',cors(), function(req, res) {
          var promises = [];
          // load all images in parallel
          for (var i = 0; i < data.length; i++) {
-            promises.push(getImage(data[i].name));
+            promises.push(getImage(data[i]));
          }
          // return promise that is resolved when all images are done loading
          return Promise.all(promises);
@@ -112,10 +121,21 @@ app.get('/data',cors(), function(req, res) {
       getAllImages().then(function(imageArray) {
          for (var i = 0; i < imageArray.length; i++) {
             slike.push({
-               "slika": imageArray[i].toString("base64")
+               "slika": imageArray[i].toString("base64"),
+               "name":data[i].name,
+               "type":"image"
             })
          }
-
+         for(var j=0;j<videos.length;j++){
+            
+            slike.push({
+               "name":videos[j].name,
+               "type":"video"
+            })
+         }
+         
+        
+console.log(slike)
          res.send(slike)
       }, function(err) {
          // an error occurred
