@@ -84,8 +84,8 @@ app.get('/video/:id',cors(), function(req, res) {
 
 app.get('/data',cors(), function(req, res) {
 
-   let arr = [];
-   const fs1 = require('fs').promises;
+   
+ 
 
 
 
@@ -135,8 +135,8 @@ app.get('/data',cors(), function(req, res) {
          }
          
         
-console.log(slike)
-         res.send(slike)
+
+         res.json(slike)
       }, function(err) {
          // an error occurred
       });
