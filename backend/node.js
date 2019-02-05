@@ -37,11 +37,11 @@ app.use(bodyParser.json({
 
 app.get('/video/:id',cors(), function(req, res) {
    var sql = "SELECT id,name,active FROM video WHERE name=? ";
-   try{
+  
 
    
    connection.query(sql,[req.params.id], function(err, results) {
-      
+       try{
       if (err) throw err
       if (results.length > 0) {
          const path = __dirname+'/upload/' + results[0].name;
@@ -76,10 +76,11 @@ app.get('/video/:id',cors(), function(req, res) {
             fs.createReadStream(path).pipe(res)
          }
       }
-   });
-}catch(error){
+   }catch(error){
    console.log(error);
 }
+   });
+
 });
 
 app.get('/data',cors(), function(req, res) {
@@ -91,7 +92,7 @@ app.get('/data',cors(), function(req, res) {
 
    var slike = [];
    var data;
-   var sql = 'SELECT id,name,active,type FROM image WHERE active=1;SELECT * FROM video where active=1';
+   var sql = 'SELECT id,name,active,type,red FROM image WHERE active=1;SELECT * FROM video where active=1';
    connection.query(sql, function(err, results) {
       if (err) throw err
       data = results[0];
@@ -123,14 +124,16 @@ app.get('/data',cors(), function(req, res) {
             slike.push({
                "slika": imageArray[i].toString("base64"),
                "name":data[i].name,
-               "type":"image"
+               "type":"image",
+               "red":data[i].red
             })
          }
          for(var j=0;j<videos.length;j++){
             
             slike.push({
                "name":videos[j].name,
-               "type":"video"
+               "type":"video",
+               "red":videos[j].red
             })
          }
          

@@ -15,14 +15,14 @@
 <h1>slike</h1>
   <ul *ngIf="images">
     <li *ngFor="let image of images">
-     Ime: {{image.name}} ,aktivno: {{image.active}} <button (click)="showhideImg(image)" class="btn btn-success">Prikazi/skrij</button><button (click)="deleteImg(image.id)" class="btn btn-success">zbrisi</button>
+     Ime: {{image.name}} ,aktivno: {{image.active}} , Vrstni red:{{image.red}} <button (click)="showhideImg(image)" class="btn btn-success">Prikazi/skrij</button><button (click)="deleteImg(image.id)" class="btn btn-success">zbrisi</button>
     </li>
 
   </ul>
   <h1>videji</h1>
   <ul *ngIf="videos">
       <li *ngFor="let video of videos">
-          Ime: {{video.name}} ,aktivno: {{video.active}} <button (click)="showhideVid(video)" class="btn btn-success">Prikazi/skrij</button><button (click)="deleteVid(video.id)" class="btn btn-success">zbrisi</button>
+          Ime: {{video.name}} ,aktivno: {{video.active}}, Vrstni red:{{image.red}} <button (click)="showhideVid(video)" class="btn btn-success">Prikazi/skrij</button><button (click)="deleteVid(video.id)" class="btn btn-success">zbrisi</button>
          </li>
 
     </ul>

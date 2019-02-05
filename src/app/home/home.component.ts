@@ -12,6 +12,8 @@ import { CarouselComponent } from 'angular-bootstrap-md';
 export class HomeComponent implements OnInit {
   @ViewChild('asd') carousel: any;
   @ViewChild("video") vid:any
+  @ViewChild('troll') hehe:any
+  
   slike=[];
   constructor(
     private _dataService: ApiDataService,
@@ -30,7 +32,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
    this.apiurl=this.actionUrl
   this.userData()  
-  
+ 
  
  //this.user=this.auth.currentUserValue;
 
@@ -41,11 +43,27 @@ export class HomeComponent implements OnInit {
    //   let elem = <HTMLVideoElement> document.getElementById(this.carousel.activeSlide)
    //   elem.play()
   //  }
-  console.log(this.carousel.slides)
+  //console.log(this.carousel.el.nativeElement.children[0].className)
+
   }
 
   async userData() {
     this.data =await this._dataService.get("data").toPromise()
+    function compare(a, b) {
+      // Use toUpperCase() to ignore character casing
+      const genreA = a.red.toUpperCase();
+      const genreB = b.red.toUpperCase();
+    
+      let comparison = 0;
+      if (genreA > genreB) {
+        comparison = 1;
+      } else if (genreA < genreB) {
+        comparison = -1;
+      }
+      return comparison;
+    }
+    
+    this.data.sort(compare);
     console.log(this.data)
     
   }
