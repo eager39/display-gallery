@@ -11,7 +11,7 @@ import { CarouselComponent } from 'angular-bootstrap-md';
 })
 export class HomeComponent implements OnInit {
   @ViewChild('asd') carousel: any;
-  @ViewChild('video') vid: any;
+ // @ViewChild('video') vid: any;
   slike=[];
   constructor(
     private _dataService: ApiDataService,
@@ -47,9 +47,9 @@ export class HomeComponent implements OnInit {
  this.carousel.interval=0
  console.log(this.carousel)
   }
-  end(){ 
+  end(name){ 
     this.carousel.interval=5000
-    this.vid.nativeElement.load();
+    name.load()
     this.carousel.nextSlide()
      }
 
