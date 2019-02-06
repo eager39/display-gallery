@@ -49,10 +49,11 @@ export class HomeComponent implements OnInit {
 
   async userData() {
     this.data =await this._dataService.get("data").toPromise()
+    console.log(this.data)
     function compare(a, b) {
       // Use toUpperCase() to ignore character casing
-      const genreA = a.red.toUpperCase();
-      const genreB = b.red.toUpperCase();
+      const genreA = a.red;
+      const genreB = b.red;
     
       let comparison = 0;
       if (genreA > genreB) {

@@ -22,7 +22,7 @@
   <h1>videji</h1>
   <ul *ngIf="videos">
       <li *ngFor="let video of videos">
-          Ime: {{video.name}} ,aktivno: {{video.active}}, Vrstni red:{{image.red}} <button (click)="showhideVid(video)" class="btn btn-success">Prikazi/skrij</button><button (click)="deleteVid(video.id)" class="btn btn-success">zbrisi</button>
+          Ime: {{video.name}} ,aktivno: {{video.active}}, Vrstni red:{{video.red}} <button (click)="showhideVid(video)" class="btn btn-success">Prikazi/skrij</button><button (click)="deleteVid(video.id)" class="btn btn-success">zbrisi</button>
          </li>
 
     </ul>
