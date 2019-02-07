@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators,FormControl} from "@angular/forms";
 import { ApiDataService } from '../api-data.service';
+
 
 @Component({
   selector: 'app-uploadfiles',
@@ -18,6 +19,12 @@ export class UploadfilesComponent implements OnInit {
   constructor(private fb: FormBuilder,  private _dataService: ApiDataService,) {
     this.createForm();
   }
+  image = new FormGroup({
+    red: new FormControl(''),
+  })
+  video = new FormGroup({
+    red: new FormControl(''),
+  })
 
 
   createForm() {
@@ -162,6 +169,9 @@ export class UploadfilesComponent implements OnInit {
         this.napaka=true;
       });
    
+  }
+  updateImgRed(id,value){
+    console.log(id+" "+value)
   }
 
   clearFile() {

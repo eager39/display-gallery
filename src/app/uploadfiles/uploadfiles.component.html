@@ -11,14 +11,15 @@
   </form>
 
 
-
+  <form [formGroup]="image">
 <h1>slike</h1>
   <ul *ngIf="images">
     <li *ngFor="let image of images">
-     Ime: {{image.name}} ,aktivno: {{image.active}} , Vrstni red:{{image.red}} <button (click)="showhideImg(image)" class="btn btn-success">Prikazi/skrij</button><button (click)="deleteImg(image.id)" class="btn btn-success">zbrisi</button>
+     Ime: {{image.name}} ,aktivno: {{image.active}} ,Vrstni red:<input type="text"  (change)="updateImgRed(image.id,image.value)" value="image.red"  formControlName="red">  <button (click)="showhideImg(image)" class="btn btn-success">Prikazi/skrij</button><button (click)="deleteImg(image.id)" class="btn btn-success">zbrisi</button>
     </li>
 
   </ul>
+  </form>
   <h1>videji</h1>
   <ul *ngIf="videos">
       <li *ngFor="let video of videos">
