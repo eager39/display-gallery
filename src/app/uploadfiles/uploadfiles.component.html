@@ -11,19 +11,21 @@
   </form>
 
 
-  <form [formGroup]="image">
+  <form [formGroup]="imageForm">
 <h1>slike</h1>
   <ul *ngIf="images">
     <li *ngFor="let image of images">
-     Ime: {{image.name}} ,aktivno: {{image.active}} ,Vrstni red:<input type="text"  (change)="updateImgRed(image.id,image.value)" value="image.red"  formControlName="red">  <button (click)="showhideImg(image)" class="btn btn-success">Prikazi/skrij</button><button (click)="deleteImg(image.id)" class="btn btn-success">zbrisi</button>
+     Ime: {{image.name}} ,aktivno: {{image.active}} ,Vrstni red:<input type="number"  (change)="updateImgRed(image.id,imageForm.value.red)" value="{{image.red}}"  formControlName="red">  <button (click)="showhideImg(image)" class="btn btn-success">Prikazi/skrij</button><button (click)="deleteImg(image.id,image.name)" class="btn btn-success">zbrisi</button>
     </li>
 
   </ul>
   </form>
+  <form [formGroup]="videoForm">
   <h1>videji</h1>
   <ul *ngIf="videos">
       <li *ngFor="let video of videos">
-          Ime: {{video.name}} ,aktivno: {{video.active}}, Vrstni red:{{video.red}} <button (click)="showhideVid(video)" class="btn btn-success">Prikazi/skrij</button><button (click)="deleteVid(video.id)" class="btn btn-success">zbrisi</button>
+          Ime: {{video.name}} ,aktivno: {{video.active}}, Vrstni red:<input type="number"  (change)="updateVidRed(video.id,videoForm.value.red)" value="{{video.red}}"  formControlName="red"> <button (click)="showhideVid(video)" class="btn btn-success">Prikazi/skrij</button><button (click)="deleteVid(video.id,video.name)" class="btn btn-success">zbrisi</button>
          </li>
 
     </ul>
+  </form>

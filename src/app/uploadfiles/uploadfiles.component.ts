@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import {FormBuilder, FormGroup, Validators,FormControl} from "@angular/forms";
 import { ApiDataService } from '../api-data.service';
+import { isNumber } from 'util';
 
 
 @Component({
@@ -19,10 +20,10 @@ export class UploadfilesComponent implements OnInit {
   constructor(private fb: FormBuilder,  private _dataService: ApiDataService,) {
     this.createForm();
   }
-  image = new FormGroup({
+  imageForm = new FormGroup({
     red: new FormControl(''),
   })
-  video = new FormGroup({
+  videoForm = new FormGroup({
     red: new FormControl(''),
   })
 
@@ -48,9 +49,9 @@ export class UploadfilesComponent implements OnInit {
   ngOnInit() {
     this.allImageVideo()
   }
-  deleteImg(id){
+  deleteImg(id,name){
     
-    this._dataService.add({"id":id},"deleteImg").subscribe(
+    this._dataService.add({"id":id,"name":name},"deleteImg").subscribe(
         (val) => {
         
           
@@ -68,8 +69,8 @@ export class UploadfilesComponent implements OnInit {
   
 
   }
-  deleteVid(id){
-    this._dataService.add({"id":id},"deleteVid").subscribe(
+  deleteVid(id,name){
+    this._dataService.add({"id":id,"name":name},"deleteVid").subscribe(
         (val) => {
          this.allImageVideo();
           
@@ -170,8 +171,27 @@ export class UploadfilesComponent implements OnInit {
       });
    
   }
-  updateImgRed(id,value){
-    console.log(id+" "+value)
+ async updateImgRed(id,value){
+   
+    if(value && isNumber(value)){ 
+       let result=await this._dataService.add({"id":id,"red":value},"updateImgRed").toPromise()
+      console.log(result)
+      if(result){
+        this.allImageVideo();
+      }
+    }
+  
+  }
+  async updateVidRed(id,value){
+   
+    if(value && isNumber(value)){ 
+       let result=await this._dataService.add({"id":id,"red":value},"updateVidRed").toPromise()
+      console.log(result)
+      if(result){
+        this.allImageVideo();
+      }
+    }
+  
   }
 
   clearFile() {

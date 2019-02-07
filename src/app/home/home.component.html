@@ -7,7 +7,7 @@
   
 
 <div class="right">
-         <mdb-carousel (activeSlideChange)="change(asd)"  #asd [isControls]="false" [interval]="3000" [noPause]="1" >
+         <mdb-carousel (activeSlideChange)="change(asd)"  #asd [isControls]="false" [interval]="1000" [noPause]="1" >
            
               <!--<mdb-carousel-item >
                   <video #video  class="video-fluid" (play)="play()" (ended)="end()"  onloadedmetadata="this.muted=true" autoplay >
@@ -17,10 +17,10 @@
                         <mdb-carousel-item #troll id="test" *ngFor="let slika of data;let i=index" >
                                  
                                         <img *ngIf="slika.type=='image'" class="d-block w-100" [src]="'data:image/jpg;base64,'+slika.slika" alt="Second slide" >
-                                        <video *ngIf="slika.type=='video' && i!=0" id="{{i}}" #video class="video-fluid" (play)="play()" (ended)="end(video)"  onloadedmetadata="this.muted=true"   >
+                                        <video controls *ngIf="slika.type=='video' && i!=0" id="{{i}}" #video class="video-fluid" (play)="play()" (ended)="end(video)"  onloadedmetadata="this.muted=true"   >
                                             <source [src]="apiurl+'video/'+slika.name" type="video/mp4" />
                                           </video>
-                                          <video *ngIf="slika.type=='video'&& i==0" id="{{i}}" #video class="video-fluid" (play)="play()" (ended)="end(video)"  onloadedmetadata="this.muted=true" autoplay  >
+                                          <video controls *ngIf="slika.type=='video'&& i==0" id="{{i}}" #video class="video-fluid" (play)="play()" (ended)="end(video)"  onloadedmetadata="this.muted=true" autoplay  >
                                             <source [src]="apiurl+'video/'+slika.name" type="video/mp4" />
                                           </video>
                                        

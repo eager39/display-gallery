@@ -232,9 +232,9 @@ app.post('/auth', function(request, response) {
 });
 app.get("/uredi", function(request, response) {
 
-   var sql = "SELECT id,name,active FROM image;SELECT * FROM video"
+   var sql = "SELECT id,name,active,red FROM image;SELECT * FROM video"
    connection.query(sql, function(err, results) {
-      console.log(results)
+     
       response.json(results)
    })
 
@@ -244,10 +244,32 @@ app.get("/uredi", function(request, response) {
 app.post("/deleteImg", function(request, response) {
 
    var id = request.body.id
+   var name = request.body.name
    var sql = "DELETE FROM image WHERE id=?"
+   connection.query("START TRANSACTION")
    connection.query(sql, [id], function(err, results) {
       if (!err) {
-         response.json(true);
+         fs.stat(__dirname+'/upload/'+name, function (err, stats) {
+           if(err){
+              console.log(err)
+              connection.query("COMMIT")
+              response.json(true);
+           }else{
+         
+         try{
+            fs.unlink(__dirname+'/upload/'+name,function(err){
+               if(err) return console.log(err);
+               console.log('file deleted successfully');
+               connection.query("COMMIT")
+               response.json(true);
+          });  
+         }catch(error){
+            console.log(error)
+            connection.query("ROLLBACK")
+         }
+      }
+      })
+         
       }
    })
 
@@ -285,9 +307,63 @@ app.post("/showhideVid", function(request, response) {
 app.post("/deleteVid", function(request, response) {
 
    var id = request.body.id
+   var name=request.body.name
    var sql = "DELETE FROM video WHERE id=?"
    connection.query(sql, [id], function(err, results) {
       if (!err) {
+
+         fs.stat(__dirname+'/upload/'+name, function (err, stats) {
+            if(err){
+               console.log(err)
+               connection.query("COMMIT")
+               response.json(true);
+            }else{
+          
+          try{
+             fs.unlink(__dirname+'/upload/'+name,function(err,result){
+                if(err) return console.log(err);
+                console.log(result)
+                console.log('file deleted successfully');
+                connection.query("COMMIT")
+                response.json(true);
+           });  
+          }catch(error){
+             console.log(error)
+             connection.query("ROLLBACK")
+          }
+       }
+       })
+      }
+   })
+
+
+
+})
+app.post("/updateImgRed", function(request, response) {
+
+   var id = request.body.id
+   var red = request.body.red
+   console.log(red)
+   var sql = "UPDATE image set red=? WHERE id=?"
+   connection.query(sql, [red, id], function(err, results) {
+      if (!err) {
+         console.log(results)
+         response.json(true);
+      }
+   })
+
+
+
+})
+app.post("/updateVidRed", function(request, response) {
+
+   var id = request.body.id
+   var red = request.body.red
+   console.log(red)
+   var sql = "UPDATE video set red=? WHERE id=?"
+   connection.query(sql, [red, id], function(err, results) {
+      if (!err) {
+         console.log(results)
          response.json(true);
       }
    })
