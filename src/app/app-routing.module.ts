@@ -13,6 +13,7 @@ const routes: Routes = [
     component:HomeComponent,
   
   },
+  
   {
     path:"",
     component:HomeComponent
@@ -26,6 +27,9 @@ const routes: Routes = [
     component:UploadfilesComponent,
    
     
+  },{
+    path:"**",
+    component:HomeComponent
   }
 ]
 

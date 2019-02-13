@@ -16,6 +16,7 @@ export class UploadfilesComponent implements OnInit {
   napaka=false;
   images;
   videos;
+  show;
   @ViewChild('fileInput') fileInput: ElementRef;
   constructor(private fb: FormBuilder,  private _dataService: ApiDataService,) {
     this.createForm();
@@ -40,6 +41,7 @@ export class UploadfilesComponent implements OnInit {
         console.log(data);
         this.images=data[0];
         this.videos=data[1];
+        console.log(this.videos)
       }
     )
   }
@@ -178,6 +180,7 @@ export class UploadfilesComponent implements OnInit {
       console.log(result)
       if(result){
         this.allImageVideo();
+        this.show="";
       }
     }
   
@@ -189,6 +192,7 @@ export class UploadfilesComponent implements OnInit {
       console.log(result)
       if(result){
         this.allImageVideo();
+        this.show="";
       }
     }
   
@@ -200,6 +204,13 @@ export class UploadfilesComponent implements OnInit {
    setTimeout(()=>{    //<<<---    using ()=> syntax
      this.uspeh=false;
  }, 2000);
+    
+  }
+  edit(id){
+    
+      this.show=id;
+   
+      
     
   }
 }

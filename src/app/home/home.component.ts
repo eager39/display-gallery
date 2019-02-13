@@ -87,7 +87,6 @@ export class HomeComponent implements OnInit {
       //console.log(item.activeSlide)
       if( item.slides[item.activeSlide].el.nativeElement.children[0].className.includes("video")){
          this.carousel.interval=0
-         console.log(this.carousel.interval+"asdFUCKU")
         let elem = <HTMLVideoElement> document.getElementById(item.activeSlide)
         elem.play()
        
