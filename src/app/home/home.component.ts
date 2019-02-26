@@ -28,10 +28,15 @@ export class HomeComponent implements OnInit {
     
   data;
   user;
+  interval;
      apiurl;
   ngOnInit() {
    this.apiurl=this.actionUrl
   this.userData()  
+  this.interval = setInterval(() => {
+    this.data=new Array();
+  this.userData()
+}, 900000);
  
  
  //this.user=this.auth.currentUserValue;
